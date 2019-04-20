@@ -1,9 +1,19 @@
 # ss-client load balancing
 
+## install docker and docker-compose 
 
-## change config.json and haproxy.cfg
+- [docker](https://docs.docker.com/install/)
+- [docker-compose](https://docs.docker.com/compose/install/)
 
-config.json
+## git clone 
+
+```angular2
+git clone https://github.com/sazima/ss-client.git
+```
+
+## Change configuration file
+
+- config.json
 
 ```angular2
 [
@@ -21,6 +31,8 @@ config.json
   ]
 ```
 
+- haproxy.cfg
+
 ```angular2
 # ...
     server ss-1081 ss:1081 weight 10 check
@@ -34,7 +46,10 @@ config.json
 ## build and run
 
 ```angular2
+cd ss-client
 docker build -t haproxy:v1 haproxy/
 docker build -t sslocal:v1 client/
 docker-compose up
 ```
+and then configure your application or browser to use proxies `socks5://127.0.0.1:25502`
+
