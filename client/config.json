@@ -1,0 +1,52 @@
+[
+  {
+    "server": "ip",
+    "local_address": "0.0.0.0",
+    "local_port": "1085",
+    "server_port": "2401",
+    "password": "pass",
+    "method": "aes-256-cfb",
+    "protocol": "origin",
+    "obfs": "plain"
+  },
+  {
+    "server": "ip",
+    "local_address": "0.0.0.0",
+    "local_port": "1084",
+    "server_port": "2402",
+    "password": "pass",
+    "method": "aes-256-cfb",
+    "protocol": "origin",
+    "obfs": "plain"
+  },
+  {
+    "server": "ip",
+    "local_address": "0.0.0.0",
+    "local_port": "1083",
+    "server_port": "2403",
+    "password": "pass",
+    "method": "aes-256-cfb",
+    "protocol": "origin",
+    "obfs": "plain"
+  },
+    {
+    "server": "ip",
+    "local_address": "0.0.0.0",
+    "local_port": "1082",
+    "server_port": "2222",
+    "password": "pass",
+    "method": "aes-128-ctr",
+    "protocol": "origin",
+    "obfs": "tls1.2_ticket_auth_compatible"
+  },
+  {
+    "server": "ip",
+    "local_address": "0.0.0.0",
+    "local_port": "1081",
+    "server_port": "2223",
+    "password": "pass",
+    "method": "aes-128-ctr",
+    "protocol": "origin",
+    "obfs": "tls1.2_ticket_auth_compatible"
+  }
+]
