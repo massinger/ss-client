@@ -1,7 +1,8 @@
 version: "3"
 services:
   ss: 
-    image: sslocal:v1                       
+#    image: sslocal:v1
+    build: client/
     networks:
       - overlay
     volumes:
@@ -10,7 +11,8 @@ services:
 
                                                                                                           
   h1:
-    image: haproxy:v1
+#    image: haproxy:v1
+    build: haproxy/
     ports:
       - 25502:25502
       - 1115:1115  

@@ -27,7 +27,16 @@ git clone https://github.com/sazima/ss-client.git
     "protocol": "origin",
     "obfs": "plain"
   },
-  #...
+    {
+    "server": "your server ip",
+    "local_address": "0.0.0.0",
+    "local_port": "1086",  
+    "server_port": "2400",
+    "password": "your password",
+    "method": "aes-256-cfb",
+    "protocol": "origin",
+    "obfs": "plain"
+  }
   ]
 ```
 
@@ -35,20 +44,21 @@ git clone https://github.com/sazima/ss-client.git
 
 ```angular2
 # ...
-    server ss-1081 ss:1081 weight 10 check
-    server ss-1082 ss:1082 weight 10 check
-    server ss-1083 ss:1083 weight 10 check
-    server ss-1084 ss:1084 weight 10 check
-    server ss-1085 ss:1085 weight 10 check
-    server bad-1 ss:1080 weight 10 check
+
+backend ss-out
+    balance roundrobin
+    option external-check
+    external-check path /app/
+    external-check command curl_get.sh
+    server ss-1085 ss:1085 weight 10 check 
+    server ss-1086 ss:1086 weight 10 check 
+    
 ```
 
 ## build and run
 
 ```angular2
 cd ss-client
-docker build -t haproxy:v1 haproxy/
-docker build -t sslocal:v1 client/
 docker-compose up
 ```
 and then configure your application or browser to use proxies `socks5://127.0.0.1:25502`
