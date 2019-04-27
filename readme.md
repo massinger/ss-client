@@ -1,19 +1,19 @@
-# ss-client load balancing
 
-## install docker and docker-compose 
+## Requirements
 
 - [docker](https://docs.docker.com/install/)
 - [docker-compose](https://docs.docker.com/compose/install/)
+- [python](https://www.python.org/)
 
-## git clone 
+
+## Get starting 
 
 ```angular2
 git clone https://github.com/sazima/ss-client.git
+cd ss-client
+vim client/config.json
 ```
-
-## Change configuration file
-
-- config.json
+ change config.json like this
 
 ```angular2
 [
@@ -40,26 +40,28 @@ git clone https://github.com/sazima/ss-client.git
   ]
 ```
 
-- haproxy.cfg
+## run
 
 ```angular2
-# ...
-
-backend ss-out
-    balance roundrobin
-    option external-check
-    external-check path /app/
-    external-check command curl_get.sh
-    server ss-1085 ss:1085 weight 10 check 
-    server ss-1086 ss:1086 weight 10 check 
-    
-```
-
-## build and run
-
-```angular2
-cd ss-client
+python config_init.py
 docker-compose up
 ```
-and then configure your application or browser to use proxies `socks5://127.0.0.1:25502`
+and then configure your application to use proxies `socks5://127.0.0.1:25502`
+
+
+## others
+
+- stop
+
+```angular2
+docker-compose down
+```
+
+- Monitoring information
+
+open `http://192.168.0.113:1115/s` and get:
+
+![info](./info.png)
+
+
 
