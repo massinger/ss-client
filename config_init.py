@@ -8,7 +8,7 @@ def config_to_haproxy(file):
         configs = json.load(rf)
     with open('haproxy/haproxy.cfg', 'w') as f:
         for conf in configs:
-            base += '    server ss-{local_port} ss:{local_port} weight 10 check inter 30000\n'.format(
+            base += '\n    server ss-{local_port} ss:{local_port} weight 10 check inter 30000'.format(
                 local_port=conf['local_port'])
         f.write(base)
 

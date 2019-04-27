@@ -1,5 +1,6 @@
 #!/usr/bin/python
 from gevent import monkey
+
 monkey.patch_all()
 import gevent
 import json
@@ -9,12 +10,14 @@ from shadowsocks.local import main as local_main
 
 
 def start_local(config):
-    sys.argv = ('sslocal -c {} start'.format(config)).split()
-    print(sys.argv)
-    sys.exit(local_main())
+    try:
+        sys.argv = ('sslocal -c {} start'.format(config)).split()
+        local_main()
+    except SystemExit:
+        pass
 
 
-def run():
+def split_config():
     with open('./config.json', 'r') as rf:
         client_datas = json.load(rf)
 
@@ -27,8 +30,8 @@ def run():
 
 
 if __name__ == '__main__':
-    for file_name in run():
-        task = gevent.spawn(start_local, file_name)
-    task.join()
+    gevent.joinall([
+        gevent.spawn(start_local, file_name) for file_name in split_config()
+    ])
 
 
